@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ViewController.h"
 #import "Person.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic) ViewController *viewController;
 
 @end
 
@@ -20,25 +22,47 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    Person *person = [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
+//    Person *person = [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
+//    
+//    if (person) {
+//        person.firstName = @"Romey";
+//        person.lastName = @"Roam";
+//        person.age = @45;
+//        
+//        NSError *saveError = nil;
+//        
+//        if ([self.managedObjectContext save:&saveError]) {
+//            NSLog(@"Saved the context");
+//        } else {
+//            NSLog(@"Failed to save the context. Error = %@", saveError.localizedDescription);
+//        }
+//    } else {
+//        NSLog(@"Failed to create new person");
+//    }
+    [self createNewPersonWithFirstName:@"Dude" lastName:@"Harley" age:45];
+    [self createNewPersonWithFirstName:@"Marv" lastName:@"In" age:99];
     
-    if (person) {
-        person.firstName = @"Romey";
-        person.lastName = @"Roam";
-        person.age = @45;
-        
-        NSError *saveError = nil;
-        
-        if ([self.managedObjectContext save:&saveError]) {
-            NSLog(@"Saved the context");
-        } else {
-            NSLog(@"Failed to save the context. Error = %@", saveError.localizedDescription);
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Person"];
+    NSError *requestError = nil;
+    
+    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&requestError];
+    
+    if ([persons count] > 0) {
+        NSUInteger counter = 1;
+        for (Person *thisGuy in persons) {
+            NSLog(@"Person %lu First Name = %@", (unsigned long)counter, thisGuy.firstName);
+            NSLog(@"Person %lu Last Name = %@", (unsigned long)counter, thisGuy.lastName);
+            NSLog(@"Person %lu Age = %ld", (unsigned long)counter, (unsigned long)[thisGuy.age unsignedIntegerValue]);
+            counter++;
         }
     } else {
-        NSLog(@"Failed to create new person");
+        NSLog(@"Could not find any Person entities in the context");
     }
+    
+    self.viewController = [[ViewController alloc] initWithNibName:nil bundle:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -152,6 +176,40 @@
             abort();
         }
     }
+}
+
+#pragma mark - NSFetchRequest
+- (BOOL) createNewPersonWithFirstName:(NSString *)firstName
+                             lastName:(NSString *)lastName
+                                  age:(NSUInteger)age
+{
+    BOOL result = NO;
+    
+    if ([firstName length] == 0 || [lastName length] == 0) {
+        NSLog(@"first and last names are mandatory!");
+        return result;  // still evaluates to 'NO'
+    }
+    
+    Person *person = [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
+    
+    if (person == nil) {
+        NSLog(@"Failed to create new person");
+        return result;  // still evaluates to 'NO'
+    }
+    
+    person.firstName = firstName;
+    person.lastName = lastName;
+    person.age = @(age);
+    
+    NSError *saveError = nil;
+    
+    if ([self.managedObjectContext save:&saveError]) {
+        return YES;     // does not change value of boolean 'result'
+    }
+    else {
+        NSLog(@"Failed to save the new person. Error: %@", saveError.localizedDescription);
+    }
+    return result;      // still evaluates to 'NO'
 }
 
 @end
