@@ -10,22 +10,26 @@
 	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>F9122B3675221E01C71EE0384607901B4645A02F</key>
+		<string>github.com:FullMetalFist/PlayingWithCoreData.git</string>
 		<key>FE7ABD4EC981C6D114FE6CD76BD15A0857F5C4C5</key>
 		<string>https://github.com/oreillymedia/iOS7_Programming_Cookbook.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PlayingWithCoreData/PlayingWithCoreData.xcodeproj/project.xcworkspace</string>
+	<string>PlayingWithCoreData.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>F9122B3675221E01C71EE0384607901B4645A02F</key>
+		<string>../..</string>
 		<key>FE7ABD4EC981C6D114FE6CD76BD15A0857F5C4C5</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/oreillymedia/iOS7_Programming_Cookbook.git</string>
+	<string>github.com:FullMetalFist/PlayingWithCoreData.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>FE7ABD4EC981C6D114FE6CD76BD15A0857F5C4C5</string>
+	<string>F9122B3675221E01C71EE0384607901B4645A02F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -34,7 +38,15 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>FE7ABD4EC981C6D114FE6CD76BD15A0857F5C4C5</string>
 			<key>IDESourceControlWCCName</key>
-			<string>iOS7_Programming_Cookbook</string>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F9122B3675221E01C71EE0384607901B4645A02F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PlayingWithCoreData</string>
 		</dict>
 	</array>
 </dict>
