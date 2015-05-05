@@ -92,26 +92,26 @@
 //        NSLog(@"Could not find any Person entities in the context");
 //    }
     
-    // sorting data in Core Data
-    [self createNewPersonWithFirstName:@"Dick" lastName:@"Branson" age:63];
-    [self createNewPersonWithFirstName:@"Tony" lastName:@"Robbins" age:53];
-    
-    // create the fetch request
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Person"];
-    NSSortDescriptor *ageSort = [[NSSortDescriptor alloc] initWithKey:@"age" ascending:YES];
-    NSSortDescriptor *firstNameSort = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
-    fetchRequest.sortDescriptors = @[ageSort, firstNameSort];
-    
-    NSError *requestError = nil;
-    
-    // execute fetch on the context
-    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&requestError];
-    
-    for (Person *person in persons) {
-        NSLog(@"First Name = %@", person.firstName);
-        NSLog(@"Last Name  = %@", person.lastName);
-        NSLog(@"Age        = %lu", (unsigned long)[person.age unsignedIntegerValue]);
-    }
+//    // sorting data in Core Data
+//    [self createNewPersonWithFirstName:@"Dick" lastName:@"Branson" age:63];
+//    [self createNewPersonWithFirstName:@"Tony" lastName:@"Robbins" age:53];
+//    
+//    // create the fetch request
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Person"];
+//    NSSortDescriptor *ageSort = [[NSSortDescriptor alloc] initWithKey:@"age" ascending:YES];
+//    NSSortDescriptor *firstNameSort = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+//    fetchRequest.sortDescriptors = @[ageSort, firstNameSort];
+//    
+//    NSError *requestError = nil;
+//    
+//    // execute fetch on the context
+//    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&requestError];
+//    
+//    for (Person *person in persons) {
+//        NSLog(@"First Name = %@", person.firstName);
+//        NSLog(@"Last Name  = %@", person.lastName);
+//        NSLog(@"Age        = %lu", (unsigned long)[person.age unsignedIntegerValue]);
+//    }
     
     
     self.viewController = [[ViewController alloc] initWithNibName:nil bundle:nil];
