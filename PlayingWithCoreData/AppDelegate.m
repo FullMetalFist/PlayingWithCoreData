@@ -39,21 +39,49 @@
 //    } else {
 //        NSLog(@"Failed to create new person");
 //    }
-    [self createNewPersonWithFirstName:@"Dude" lastName:@"Harley" age:45];
-    [self createNewPersonWithFirstName:@"Marv" lastName:@"In" age:99];
     
+    // read data from Core Data
+//    [self createNewPersonWithFirstName:@"Dude" lastName:@"Harley" age:45];
+//    [self createNewPersonWithFirstName:@"Marv" lastName:@"In" age:99];
+//    
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Person"];
+//    NSError *requestError = nil;
+//    
+//    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&requestError];
+//    
+//    if ([persons count] > 0) {
+//        NSUInteger counter = 1;
+//        for (Person *thisGuy in persons) {
+//            NSLog(@"Person %lu First Name = %@", (unsigned long)counter, thisGuy.firstName);
+//            NSLog(@"Person %lu Last Name = %@", (unsigned long)counter, thisGuy.lastName);
+//            NSLog(@"Person %lu Age = %ld", (unsigned long)counter, (unsigned long)[thisGuy.age unsignedIntegerValue]);
+//            counter++;
+//        }
+//    } else {
+//        NSLog(@"Could not find any Person entities in the context");
+//    }
+    
+    // delete data from Core Data
+    [self createNewPersonWithFirstName:@"Tony" lastName:@"Robbins" age:53];
+    [self createNewPersonWithFirstName:@"Dick" lastName:@"Branson" age:63];
+    
+    // create fetch request first
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Person"];
-    NSError *requestError = nil;
+    NSError *fetchError = nil;
     
-    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&requestError];
-    
+    // execute fetch request on the context
+    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
+    // make sure we get the array
     if ([persons count] > 0) {
-        NSUInteger counter = 1;
-        for (Person *thisGuy in persons) {
-            NSLog(@"Person %lu First Name = %@", (unsigned long)counter, thisGuy.firstName);
-            NSLog(@"Person %lu Last Name = %@", (unsigned long)counter, thisGuy.lastName);
-            NSLog(@"Person %lu Age = %ld", (unsigned long)counter, (unsigned long)[thisGuy.age unsignedIntegerValue]);
-            counter++;
+        // delete the last person in the array (Dick Branson)
+        Person *lastPerson = [persons lastObject];
+        [self.managedObjectContext deleteObject:lastPerson];
+        
+        NSError *savingError = nil;
+        if ([self.managedObjectContext save:&savingError]) {
+            NSLog(@"Successfully deleted last person in the array");
+        } else {
+            NSLog(@"Failed to delete the last person in the array");
         }
     } else {
         NSLog(@"Could not find any Person entities in the context");

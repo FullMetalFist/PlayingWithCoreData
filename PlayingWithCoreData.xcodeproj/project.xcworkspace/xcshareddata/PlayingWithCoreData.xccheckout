@@ -7,7 +7,7 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>BABC937A-1D04-479D-A347-644D48CE90E9</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>PlayingWithCoreData</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F9122B3675221E01C71EE0384607901B4645A02F</key>
@@ -16,7 +16,7 @@
 		<string>https://github.com/oreillymedia/iOS7_Programming_Cookbook.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PlayingWithCoreData.xcodeproj/project.xcworkspace</string>
+	<string>PlayingWithCoreData.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F9122B3675221E01C71EE0384607901B4645A02F</key>
