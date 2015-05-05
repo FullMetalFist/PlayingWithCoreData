@@ -77,11 +77,16 @@
         Person *lastPerson = [persons lastObject];
         [self.managedObjectContext deleteObject:lastPerson];
         
-        NSError *savingError = nil;
-        if ([self.managedObjectContext save:&savingError]) {
+        if ([lastPerson isDeleted]) {
             NSLog(@"Successfully deleted last person in the array");
+            NSError *savingError = nil;
+            if ([self.managedObjectContext save:&savingError]) {
+                NSLog(@"Successfully saved the context");
+            } else {
+                NSLog(@"Failed to save the context");
+            }
         } else {
-            NSLog(@"Failed to delete the last person in the array");
+            NSLog(@"Failed to delete the last person");
         }
     } else {
         NSLog(@"Could not find any Person entities in the context");
