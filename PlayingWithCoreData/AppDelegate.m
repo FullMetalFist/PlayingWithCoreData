@@ -61,36 +61,58 @@
 //        NSLog(@"Could not find any Person entities in the context");
 //    }
     
-    // delete data from Core Data
-    [self createNewPersonWithFirstName:@"Tony" lastName:@"Robbins" age:53];
+//    // delete data from Core Data
+//    [self createNewPersonWithFirstName:@"Tony" lastName:@"Robbins" age:53];
+//    [self createNewPersonWithFirstName:@"Dick" lastName:@"Branson" age:63];
+//    
+//    // create fetch request first
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Person"];
+//    NSError *fetchError = nil;
+//    
+//    // execute fetch request on the context
+//    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
+//    // make sure we get the array
+//    if ([persons count] > 0) {
+//        // delete the last person in the array (Dick Branson)
+//        Person *lastPerson = [persons lastObject];
+//        [self.managedObjectContext deleteObject:lastPerson];
+//        
+//        if ([lastPerson isDeleted]) {
+//            NSLog(@"Successfully deleted last person in the array");
+//            NSError *savingError = nil;
+//            if ([self.managedObjectContext save:&savingError]) {
+//                NSLog(@"Successfully saved the context");
+//            } else {
+//                NSLog(@"Failed to save the context");
+//            }
+//        } else {
+//            NSLog(@"Failed to delete the last person");
+//        }
+//    } else {
+//        NSLog(@"Could not find any Person entities in the context");
+//    }
+    
+    // sorting data in Core Data
     [self createNewPersonWithFirstName:@"Dick" lastName:@"Branson" age:63];
+    [self createNewPersonWithFirstName:@"Tony" lastName:@"Robbins" age:53];
     
-    // create fetch request first
+    // create the fetch request
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Person"];
-    NSError *fetchError = nil;
+    NSSortDescriptor *ageSort = [[NSSortDescriptor alloc] initWithKey:@"age" ascending:YES];
+    NSSortDescriptor *firstNameSort = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+    fetchRequest.sortDescriptors = @[ageSort, firstNameSort];
     
-    // execute fetch request on the context
-    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
-    // make sure we get the array
-    if ([persons count] > 0) {
-        // delete the last person in the array (Dick Branson)
-        Person *lastPerson = [persons lastObject];
-        [self.managedObjectContext deleteObject:lastPerson];
-        
-        if ([lastPerson isDeleted]) {
-            NSLog(@"Successfully deleted last person in the array");
-            NSError *savingError = nil;
-            if ([self.managedObjectContext save:&savingError]) {
-                NSLog(@"Successfully saved the context");
-            } else {
-                NSLog(@"Failed to save the context");
-            }
-        } else {
-            NSLog(@"Failed to delete the last person");
-        }
-    } else {
-        NSLog(@"Could not find any Person entities in the context");
+    NSError *requestError = nil;
+    
+    // execute fetch on the context
+    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&requestError];
+    
+    for (Person *person in persons) {
+        NSLog(@"First Name = %@", person.firstName);
+        NSLog(@"Last Name  = %@", person.lastName);
+        NSLog(@"Age        = %lu", (unsigned long)[person.age unsignedIntegerValue]);
     }
+    
     
     self.viewController = [[ViewController alloc] initWithNibName:nil bundle:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
