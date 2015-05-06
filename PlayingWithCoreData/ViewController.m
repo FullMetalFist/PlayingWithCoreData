@@ -10,13 +10,14 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "Person.h"
+#import "AddPersonViewController.h"
 
 static NSString *CellIdentifier = @"CellIdentifier";
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
 @property (nonatomic) UITableView *tableView;
-@property (nonatomic) UIButton *button;
+@property (nonatomic) UIButton *addPersonButton;
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
@@ -29,10 +30,25 @@ static NSString *CellIdentifier = @"CellIdentifier";
     [self createView];
 }
 
+- (NSManagedObjectContext *) managedObjectContext {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    return appDelegate.managedObjectContext;
+}
+
 - (void)createView {
     CGRect tableViewFrame = CGRectMake(20, 20, 320, 550);
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
+    
+    CGRect addPersonFrame = CGRectMake(20, 570, 320, 44);
+    self.addPersonButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.addPersonButton.frame = addPersonFrame;
+    [self.addPersonButton setTitle:@"Add Person" forState:UIControlStateNormal];
+    [self.addPersonButton setTitle:@"Adding" forState:UIControlStateHighlighted];
+    [self.addPersonButton addTarget:self action:@selector(addPerson) forControlEvents:UIControlEventTouchDown];
+    
+    
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.addPersonButton];
 }
 
 - (void) controllerWillChangeContent:(NSFetchedResultsController *)controller
@@ -59,6 +75,12 @@ static NSString *CellIdentifier = @"CellIdentifier";
     [self.tableView endUpdates];
 }
 
+- (void) addPerson
+{
+    AddPersonViewController *addPersonVC = [[AddPersonViewController alloc] initWithNibName:nil bundle:nil];
+    [self presentViewController:addPersonVC animated:YES completion:nil];
+}
+
 #pragma mark -- UITableView methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -76,6 +98,21 @@ static NSString *CellIdentifier = @"CellIdentifier";
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[section];
     return sectionInfo.numberOfObjects;
+}
+
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Person *toDelete = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [[self managedObjectContext] deleteObject:toDelete];
+    
+    if ([toDelete isDeleted]) {
+        NSError *savingError = nil;
+        if ([[self managedObjectContext] save:&savingError]) {
+            NSLog(@"Successfully deleted the object");
+        } else {
+            NSLog(@"Failed to save the context. Error: %@", savingError);
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

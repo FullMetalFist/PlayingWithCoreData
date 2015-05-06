@@ -15,6 +15,7 @@
 		7C0658FB1AF7C5B800A61656 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0658F91AF7C5B800A61656 /* LaunchScreen.xib */; };
 		7C0659071AF7C5B800A61656 /* PlayingWithCoreDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C0659061AF7C5B800A61656 /* PlayingWithCoreDataTests.m */; };
 		7C0659121AF7CC3400A61656 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C0659111AF7CC3400A61656 /* Person.m */; };
+		7C6BD5731AFA5FD9000B652C /* AddPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6BD5721AFA5FD9000B652C /* AddPersonViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		7C0659061AF7C5B800A61656 /* PlayingWithCoreDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayingWithCoreDataTests.m; sourceTree = "<group>"; };
 		7C0659101AF7CC3400A61656 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		7C0659111AF7CC3400A61656 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		7C6BD5711AFA5FD9000B652C /* AddPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPersonViewController.h; sourceTree = "<group>"; };
+		7C6BD5721AFA5FD9000B652C /* AddPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPersonViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				7C0658EC1AF7C5B800A61656 /* AppDelegate.m */,
 				7C0658F11AF7C5B800A61656 /* ViewController.h */,
 				7C0658F21AF7C5B800A61656 /* ViewController.m */,
+				7C6BD5711AFA5FD9000B652C /* AddPersonViewController.h */,
+				7C6BD5721AFA5FD9000B652C /* AddPersonViewController.m */,
 				7C0658F71AF7C5B800A61656 /* Images.xcassets */,
 				7C0658F91AF7C5B800A61656 /* LaunchScreen.xib */,
 				7C0658EE1AF7C5B800A61656 /* PlayingWithCoreData.xcdatamodeld */,
@@ -228,6 +233,7 @@
 				7C0659121AF7CC3400A61656 /* Person.m in Sources */,
 				7C0658F31AF7C5B800A61656 /* ViewController.m in Sources */,
 				7C0658F01AF7C5B800A61656 /* PlayingWithCoreData.xcdatamodeld in Sources */,
+				7C6BD5731AFA5FD9000B652C /* AddPersonViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +420,7 @@
 				7C06590C1AF7C5B800A61656 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7C06590D1AF7C5B800A61656 /* Build configuration list for PBXNativeTarget "PlayingWithCoreDataTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +429,7 @@
 				7C06590F1AF7C5B800A61656 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

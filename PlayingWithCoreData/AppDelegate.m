@@ -13,6 +13,7 @@
 @interface AppDelegate ()
 
 @property (nonatomic) ViewController *viewController;
+@property (nonatomic) UINavigationController *naviController;
 
 @end
 
@@ -115,9 +116,11 @@
     
     
     self.viewController = [[ViewController alloc] initWithNibName:nil bundle:nil];
+    self.naviController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = self.naviController;
+    
     [self.window makeKeyAndVisible];
     
     return YES;
